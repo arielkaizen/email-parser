@@ -99,10 +99,10 @@ $ npm run start:dev
 <h4>Endpoints</h4>
 
 <ul>
-  <li><code>GET /emails/:emailPath</code>
+  <li><code>GET /email/json?emailPath=</code>
     <ul>
       <li>Parses an email and extracts JSON content.</li>
-      <li><strong>Parameters:</strong>
+      <li><strong>Query Parameters:</strong>
         <ul>
           <li><code>emailPath</code>: The path to the email file.</li>
         </ul>
@@ -119,11 +119,11 @@ $ npm run start:dev
 
 <h2>Example Usage</h2>
 
-<p>To parse an email and extract JSON content, send a GET request to the <code>/emails/:emailPath</code> endpoint with the path to the email file as a parameter.</p>
+<p>To parse an email and extract JSON content, send a GET request to the <code>/email/json?emailPath</code> endpoint with the path to the email file as a query parameter.</p>
 
 <p>Example:</p>
 
-<pre><code>curl http://localhost:3000/emails/path/to/email/file.eml
+<pre><code>curl http://localhost:3000/email/json?emailPath=/path/to/email/file.eml
 </code></pre>
 
 <h2>License</h2>
