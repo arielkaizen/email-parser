@@ -133,6 +133,20 @@ $ npm run start:dev
 <pre><code>curl http://localhost:3000/email/json?emailPath=/path/to/email/file.eml
 </code></pre>
 
+<h2>JsonFileDto Schema</h2>
+
+<p>The <code>JsonFileDto</code> schema represents the structure of the JSON file extracted from the email.</p>
+
+<ul>
+  <li><strong>Properties:</strong>
+    <ul>
+      <li><code>fileName</code>: The name of the file.</li>
+      <li><code>origin</code>: The origin of the JSON content (e.g., attachment, link).</li>
+      <li><code>json</code>: The JSON content.</li>
+    </ul>
+  </li>
+</ul>
+
 <h2>License</h2>
 
 <p>Nest is <a href="https://github.com/nestjs/nest/blob/master/LICENSE">MIT licensed</a>.</p>
