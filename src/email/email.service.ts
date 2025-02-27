@@ -66,7 +66,7 @@ export class EmailService {
                 };
             })) : undefined;
         } catch (error) {
-            throw { code: ErrorCodes.NETWORK_ERROR, message: error.message, status: 400 };
+            throw { code: ErrorCodes.NETWORK_ERROR, message: error.message, status: 404 };
         }
     }
 

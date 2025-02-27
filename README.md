@@ -109,8 +109,15 @@ $ npm run start:dev
       </li>
       <li><strong>Responses:</strong>
         <ul>
-          <li><code>200</code>: JSON extracted from the email.</li>
-          <li><strong>Response Type:</strong> <code>JsonFileDto[]</code></li>
+          <li><code>{
+            "statusCode": 200,
+            "data": [
+              JsonFileDto[]
+            ]
+          }</code></li>
+          <li><code>400</code>: Error reading the email.</li>
+          <li><code>400</code>: JSON parse error.</li>
+          <li><code>404</code>: Network error.</li>
         </ul>
       </li>
     </ul>
