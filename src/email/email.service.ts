@@ -8,6 +8,11 @@ import axios from 'axios';
 @Injectable()
 export class EmailService {
 
+    /**
+     * Parses an email file and extracts JSON content from attachments and links.
+     * @param emailPath - The path to the email file.
+     * @returns A promise that resolves to an array of JsonFileDto objects.
+     */
     async parseEmail(emailPath: string) {
         const email = fs.readFileSync(emailPath, 'utf8');
         const parsedEmail: ParsedMail = await simpleParser(email);
@@ -18,6 +23,11 @@ export class EmailService {
         return jsonAttatchments.concat(jsonsByLink || []);
     }
 
+    /**
+     * Extracts JSON content from email attachments.
+     * @param parsedEmail - The parsed email object.
+     * @returns A promise that resolves to an array of JsonFileDto objects.
+     */
     async getJsonAttatchments(parsedEmail: ParsedMail): Promise<JsonFileDto[]> {
         const attachments = parsedEmail.attachments;
         return attachments.filter(attachment => attachment.contentType === 'application/json').map(attachment => {
@@ -29,6 +39,11 @@ export class EmailService {
         });
     }
 
+    /**
+     * Extracts JSON content from links found in the email body.
+     * @param parsedEmail - The parsed email object.
+     * @returns A promise that resolves to an array of JsonFileDto objects or undefined.
+     */
     private async getJsonByLinks(parsedEmail: ParsedMail): Promise<JsonFileDto[] | undefined> {
         const urls = this.getAnchorLinks(parsedEmail);
         return urls.length ? Promise.all(urls.map(async url => {
@@ -41,6 +56,11 @@ export class EmailService {
         })) : undefined;
     }
 
+    /**
+     * Extracts URLs from anchor links in the email body.
+     * @param parsedEmail - The parsed email object.
+     * @returns An array of URLs.
+     */
     private getAnchorLinks(parsedEmail: ParsedMail): string[] {
         const regex = /<a\s+(?:[^>]*?\s+)?href="(https?:\/\/[^\s]+\.json)">\1<\/a>/g;
         const matches = parsedEmail.html.toString().matchAll(regex);
