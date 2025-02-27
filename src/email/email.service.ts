@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { ParsedMail, simpleParser } from 'mailparser';
+import { JsonFileDto } from './dto/json-file.dto';
+import { ORIGIN } from './enum/origin.enum';
 
 @Injectable()
 export class EmailService {
@@ -11,10 +13,14 @@ export class EmailService {
         return this.getJsonAttatchments(parsedEmail);
     }
 
-    async getJsonAttatchments(parsedEmail: ParsedMail) {
+    async getJsonAttatchments(parsedEmail: ParsedMail): Promise<JsonFileDto[]> {
         const attachments = parsedEmail.attachments;
         return attachments.filter(attachment => attachment.contentType === 'application/json').map(attachment => {
-            return JSON.parse(attachment.content.toString());
+            return {
+                fileName: attachment.filename,
+                from: ORIGIN.ATTACHMENT,
+                json: JSON.parse(attachment.content.toString())
+            };
         });
     }
     
