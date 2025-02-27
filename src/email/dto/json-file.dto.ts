@@ -1,5 +1,7 @@
+import { ORIGIN } from "../enum/origin.enum";
+
 export class JsonFileDto {
     fileName: string | undefined;
-    from: string;
+    origin: ORIGIN;
     json: any;
 };
